@@ -1,0 +1,299 @@
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 6. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 7. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 8. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/*
+  10. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+:root {
+  /* https://www.realtimecolors.com/dashboard?colors=e9ebf3-0d101b-95a3d3-293971-2d50d4&fonts=Inter-Inter */
+  --subdark: #232538;
+  --dark: #0d101b;
+  --light: #e9ebf3;
+  --primary: #95a3d3;
+  --secondary: #293971;
+  --accent: #2d50d4;
+}
+
+html {
+  height: 100vh;
+  background-color: var(--dark);
+}
+body {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  color: var(--light);
+  font-family: inter;
+}
+
+.player-stats {
+  width: 100%;
+  align-self: start;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.outer-container {
+  border: 6px solid var(--light);
+  width: 315px;
+  height: 315px;
+  border-radius: 18px;
+  padding: 16px;
+  background-color: var(--subdark);
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.mark-spots {
+  background-color: var(--primary);
+  border-radius: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.x svg {
+  height: 70%;
+}
+
+.mark-spots:has(svg) {
+  background-color: var(--secondary);
+}
+
+svg {
+  fill: var(--light);
+}
+
+.mark-spots:empty:hover {
+  background-color: var(--accent);
+  cursor: pointer;
+}
+
+span.x-stats,
+span.circle-stats {
+  display: flex;
+  align-items: center;
+}
+span.x-stats svg {
+  height: 16px;
+  padding-left: 2px;
+  margin-right: 8px;
+}
+
+span.circle-stats svg {
+  height: 20px;
+  margin-right: 8px;
+}
+
+.score {
+  margin-left: 8px;
+}
+dialog#names-dialog {
+  font-weight: bold;
+  margin: auto;
+  background-color: var(--dark);
+  color: var(--light);
+  border-radius: 24px;
+  border: 2px solid var(--light);
+  height: 300px;
+  aspect-ratio: 2/1.2;
+}
+
+dialog#names-dialog .dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+dialog::backdrop {
+  backdrop-filter: blur(6px);
+}
+
+dialog span.x-icon svg {
+  fill: var(light);
+  margin-right: 8px;
+  width: 20px;
+}
+dialog span.circle-icon svg {
+  fill: var(--light);
+  margin-right: 4px;
+  width: 20px;
+}
+.player-name-input {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  justify-content: space-between;
+}
+
+dialog input {
+  width: 370px;
+  background-color: var(--subdark);
+  border: 2px solid var(--accent);
+  color: var(--light);
+  padding: 0px 16px;
+  border-radius: 16px;
+}
+
+.dialog-buttons {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 400px;
+}
+
+.dialog-buttons button {
+  flex: 1;
+  border-radius: 16px;
+  font-size: 16px;
+  background-color: var(--secondary);
+  color: var(--light);
+  font-weight: bold;
+  padding: 8px;
+  border: 2px solid var(--accent);
+}
+
+.dialog-buttons button:hover {
+  filter: brightness(0.9);
+  cursor: pointer;
+}
+
+label:hover {
+  cursor: pointer;
+}
+
+dialog#result-dialog {
+  font-weight: bold;
+  background-color: var(--dark);
+  color: var(--light);
+  border-radius: 24px;
+  border: 2px solid var(--light);
+  height: 300px;
+  aspect-ratio: 2/1.2;
+  top: 80px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+dialog#result-dialog .dialog-content {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+}
+
+.single-line {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 545px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 4fr;
+  }
+  .outer-container {
+    align-self: start;
+    grid-row: 3;
+  }
+  .dialog-buttons {
+    flex-direction: column;
+    align-self: center;
+    max-width: 240px;
+  }
+
+  .dialog-buttons button {
+    max-width: 240px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  form input {
+    max-width: 212px;
+  }
+}

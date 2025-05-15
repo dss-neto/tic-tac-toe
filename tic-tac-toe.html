@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic-Tac-Toe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <dialog id="names-dialog">
+      <div class="dialog-content">
+        <div class="dialog-header">Welcome!</div>
+        <div class="upper-label">Select players' name:</div>
+        <form
+          action="/script.js"
+          method="post"
+          pattern="\S.*"
+          class="player-name-form"
+          id="player-name-form"
+        >
+          <div class="player-name-input">
+            <label for="PlayerXName">
+              <span class="x-icon"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 460.775 460.775"
+                  height="16px"
+                >
+                  <path
+                    d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55 c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55 c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505 c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55 l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719 c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"
+                  ></path></svg
+              ></span>
+            </label>
+            <input
+              type="text"
+              name="PlayerXName"
+              pattern="\S.*"
+              title="Must not start with whitespace"
+              id="PlayerXName"
+              autocomplete="off"
+              maxlength="24"
+              required
+            />
+          </div>
+          <div class="player-name-input">
+            <label for="PlayerCircleName">
+              <span class="circle-icon"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  height="20px"
+                >
+                  <title>circle-outline</title>
+                  <path
+                    d="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+                  /></svg
+              ></span>
+            </label>
+            <input
+              type="text"
+              name="PlayerCircleName"
+              title="Must not start with whitespace"
+              id="PlayerCircleName"
+              autocomplete="off"
+              maxlength="24"
+              required
+            />
+          </div>
+          <div class="dialog-buttons">
+            <button type="submit">Play</button>
+            <button type="button" id="play-anonymously">
+              Play anonymously
+            </button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+    <div class="player-stats">
+      <span class="x-stats"
+        ><span class="x-icon"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 460.775 460.775"
+            height="16px"
+          >
+            <path
+              d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55 c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55 c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505 c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55 l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719 c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"
+            ></path></svg></span
+        ><span id="x-player-name">X</span>:
+        <span class="score" id="x-score">0</span></span
+      >
+      <span class="circle-stats"
+        ><span class="circle-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            height="20px"
+          >
+            <path
+              d="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+            /></svg></span
+        ><span id="circle-player-name">Circle</span>:
+        <span class="score" id="circle-score">0</span></span
+      >
+    </div>
+    <div class="outer-container" id="outer-container">
+      <div class="mark-spots unmarked" id="a"></div>
+      <div class="mark-spots unmarked" id="b"></div>
+      <div class="mark-spots unmarked" id="c"></div>
+      <div class="mark-spots unmarked" id="d"></div>
+      <div class="mark-spots unmarked" id="e"></div>
+      <div class="mark-spots unmarked" id="f"></div>
+      <div class="mark-spots unmarked" id="g"></div>
+      <div class="mark-spots unmarked" id="h"></div>
+      <div class="mark-spots unmarked" id="i"></div>
+    </div>
+    <dialog id="result-dialog">
+      <div class="dialog-content">
+        <div class="single-line">
+          <span class="winner-icon"></span><span id="winner-result-text"></span
+          ><span class="winner-icon"></span>
+        </div>
+        <div class="dialog-buttons">
+          <button class="next-round" id="next-round">Next round</button>
+        </div>
+      </div>
+    </dialog>
+    <script src="script.js"></script>
+  </body>
+</html>
